@@ -14,7 +14,7 @@ import lombok.ToString;
  * @ai-generated
  * @generator Kiro
  * @author sinhuiyo
- * @line Kiro Edit Line : 57, Total Code Line : 57
+ * @line Kiro Edit Line : 60, Total Code Line : 60
  */
 @Entity
 @Getter
@@ -37,6 +37,9 @@ public class Board {
 
     /** 등록일 (yyyy-MM-dd 형식) */
     private String regDate;
+
+    /** 수정일 (yyyy-MM-dd형식) */
+    private String modDate;
 
     /** 첨부파일 저장 경로 (상대 경로) */
     private String filePath;
