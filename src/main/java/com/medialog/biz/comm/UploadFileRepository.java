@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @ai-generated
  * @generator Kiro
- * @author Unknown
+ * @author sinhuiyo
  * @line Kiro Edit Line : 14, Total Code Line : 14
  */
 public interface UploadFileRepository extends JpaRepository<UploadFile, Long> {

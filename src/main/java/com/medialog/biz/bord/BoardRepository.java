@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @ai-generated
  * @generator Kiro
- * @author Unknown
+ * @author sinhuiyo
  * @line Kiro Edit Line : 25, Total Code Line : 25
  */
 public interface BoardRepository extends JpaRepository<Board, Integer> {

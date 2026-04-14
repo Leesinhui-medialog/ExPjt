@@ -1436,6 +1436,22 @@
 
 ---
 
+### 179. Kiro 생성 코드 리포트 생성
+
+| 질의 | 프로젝트의 모든 Java 파일에서 @author, @line Kiro Edit Line 정보를 추출하여 kiro-generated.md 파일 생성 요청 |
+|------|----------------------------------------------------------------------------------------------|
+| 결과 | 전체 35개 Java 파일(src/main 21개, src/test 14개)에서 `@author`, `@line Kiro Edit Line`, `Total Code Line`, 마지막 수정 날짜를 추출. `kiro-generated.md` 파일 생성하여 파일별 상세 테이블 + 하단 합산값(Kiro Total Edit Line: 2,629 / File Total Line: 2,629) 표기. 동일 파일명 존재 시 삭제 후 새로 등록하는 규칙 적용. |
+
+---
+
+### 180. @author Unknown → sinhuiyo 일괄 변경
+
+| 질의 | @author Unknown으로 되어 있는 부분을 Kiro 로그인 계정(sinhuiyo)으로 변경 요청 |
+|------|------------------------------------------------------------------|
+| 결과 | 전체 Java 파일 중 `@author Unknown`이었던 22개 파일을 `@author sinhuiyo`로 일괄 변경. 변경 대상: `BizApplication.java`, `Board.java`, `BoardController.java`, `BoardRepository.java`, `BoardService.java`, `FileUploadController.java`, `FileUploadService.java`, `UploadFile.java`, `UploadFileRepository.java`, `WebConfig.java`, `MailController.java`, `MailRequest.java`, `MailService.java`, `HelloWorldController.java`, `HelloWorldService.java`, `BizApplicationTests.java`, `BoardControllerTest.java`, `BoardRepositoryTest.java`, `BoardServiceTest.java`, `FileUploadServiceTest.java`, `UploadFileRepositoryTest.java`, `HelloWorldControllerTest.java`, `HelloWorldServiceTest.java`, `MailControllerTest.java`, `MailServiceTest.java`. `kiro-generated.md`도 동일하게 Unknown → sinhuiyo로 업데이트. |
+
+---
+
 ## 현재 프로젝트 구조
 
 ```

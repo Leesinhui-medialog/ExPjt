@@ -15,7 +15,7 @@ import jakarta.mail.internet.MimeMessage;
  *
  * @ai-generated
  * @generator Kiro
- * @author Unknown
+ * @author sinhuiyo
  * @line Kiro Edit Line : 71, Total Code Line : 71
  */
 @Slf4j

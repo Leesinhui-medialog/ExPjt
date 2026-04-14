@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  * @ai-generated
  * @generator Kiro
- * @author Unknown
+ * @author sinhuiyo
  * @line Kiro Edit Line : 34, Total Code Line : 34
  */
 @Slf4j

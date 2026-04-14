@@ -13,7 +13,7 @@ import lombok.ToString;
  *
  * @ai-generated
  * @generator Kiro
- * @author Unknown
+ * @author sinhuiyo
  * @line Kiro Edit Line : 57, Total Code Line : 57
  */
 @Entity
