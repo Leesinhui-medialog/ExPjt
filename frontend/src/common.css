@@ -1,8 +1,8 @@
 /* ===== 공통 기본 스타일 ===== */
 body {
     font-family: -apple-system, 'Segoe UI', sans-serif;
-    margin: 40px auto;
-    padding: 0 24px;
+    margin: 0;
+    padding: 0;
     color: #222;
 }
 
@@ -192,15 +192,17 @@ tr:hover td {
 
 /* ===== 레이아웃 ===== */
 .container-narrow {
-    width: 80%;
-    max-width: 80%;
-    margin: 0 auto;
+    width: 96%;
+    max-width: 96%;
+    margin: 20px 2%;
+    padding: 0;
 }
 
 .container-wide {
-    width: 80%;
-    max-width: 80%;
-    margin: 0 auto;
+    width: 96%;
+    max-width: 96%;
+    margin: 20px 2%;
+    padding: 0;
 }
 
 .text-right {

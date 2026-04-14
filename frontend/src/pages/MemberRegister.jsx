@@ -160,7 +160,7 @@ export default function MemberRegister() {
   };
 
   return (
-    <div style={{ width: '80%', margin: '0 auto' }}>
+    <div style={{ margin: '20px 2%' }}>
       <h1>회원가입</h1>
 
       {/* 스텝 인디케이터 */}

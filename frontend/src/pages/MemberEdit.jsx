@@ -62,7 +62,7 @@ export default function MemberEdit() {
   };
 
   return (
-    <div style={{ width: '80%', margin: '0 auto' }}>
+    <div style={{ margin: '20px 2%' }}>
       <h1>개인정보 변경</h1>
 
       <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>

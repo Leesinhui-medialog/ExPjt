@@ -18,7 +18,7 @@ export default function MemberList() {
   }, []);
 
   return (
-    <div style={{ width: '80%', margin: '0 auto' }}>
+    <div style={{ margin: '20px 2%' }}>
       <h1>회원 목록</h1>
 
       <table>
@@ -42,12 +42,12 @@ export default function MemberList() {
           ) : (
             members.map((member) => (
               <tr key={member.memberIndex}>
-                <td>{member.memberIndex}</td>
-                <td>{member.memberName}</td>
-                <td>{member.email}</td>
-                <td>{member.telephoneNumber}</td>
-                <td>{member.birthDate}</td>
-                <td>{member.registrationDate}</td>
+                <td style={{ textAlign: 'center' }}>{member.memberIndex}</td>
+                <td style={{ textAlign: 'center' }}>{member.memberName}</td>
+                <td style={{ textAlign: 'center' }}>{member.email}</td>
+                <td style={{ textAlign: 'center' }}>{member.telephoneNumber}</td>
+                <td style={{ textAlign: 'center' }}>{member.birthDate}</td>
+                <td style={{ textAlign: 'center' }}>{member.registrationDate}</td>
               </tr>
             ))
           )}
