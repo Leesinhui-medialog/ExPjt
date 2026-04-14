@@ -10,6 +10,33 @@ import Login from './pages/Login';
 import MemberEdit from './pages/MemberEdit';
 import PasswordChange from './pages/PasswordChange';
 
+/** 페이지별 브라우저 탭 제목 매핑 */
+const PAGE_TITLES = {
+  '/login': '로그인',
+  '/board/list': '게시판 - 목록',
+  '/board/write': '게시판 - 글쓰기',
+  '/board/edit': '게시판 - 수정',
+  '/mail': '메일',
+  '/member/register': '회원 - 가입',
+  '/member/list': '회원 - 목록',
+  '/member/edit': '회원 - 개인정보 변경',
+  '/member/password': '회원 - 비밀번호 변경',
+};
+
+/** 현재 경로에 맞는 브라우저 탭 제목을 설정하는 컴포넌트 */
+function PageTitle() {
+  const location = useLocation();
+  useEffect(() => {
+    const path = location.pathname;
+    /* 정확히 일치하는 경로 먼저 확인, 없으면 접두어 매칭 */
+    const title = PAGE_TITLES[path]
+      || Object.entries(PAGE_TITLES).find(([key]) => path.startsWith(key))?.[1]
+      || 'ExPjt';
+    document.title = title;
+  }, [location.pathname]);
+  return null;
+}
+
 /** 공통 상단 헤더 — 로그인 상태에 따라 로그인/로그아웃 버튼 전환 */
 function TopHeader() {
   const navigate = useNavigate();
@@ -139,6 +166,7 @@ function ProtectedRoute({ children }) {
 export default function App() {
   return (
     <>
+      <PageTitle />
       <TopHeader />
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
