@@ -142,7 +142,7 @@ const styles = {
     color: '#fff',
     display: 'flex',
     flexDirection: 'column',
-    fontSize: '16px',
+    fontSize: '18px',
   },
   userArea: {
     display: 'flex',
@@ -169,12 +169,12 @@ const styles = {
   },
   userName: {
     fontWeight: 'bold',
-    fontSize: '17px',
+    fontSize: '19px',
     color: '#fff',
   },
   userEmail: {
-    fontSize: '13px',
-    color: '#aaa',
+    fontSize: '15px',
+    color: '#ddd',
   },
   divider: {
     height: '1px',
@@ -182,7 +182,7 @@ const styles = {
   },
   navLabel: {
     padding: '16px 16px 8px',
-    fontSize: '13px',
+    fontSize: '15px',
     color: '#f0a500',
     fontWeight: 'bold',
     letterSpacing: '1px',
@@ -202,14 +202,14 @@ const styles = {
   },
   menuIcon: {
     marginRight: '10px',
-    fontSize: '20px',
+    fontSize: '22px',
   },
   menuLabel: {
     flex: 1,
   },
   arrow: {
-    fontSize: '12px',
-    color: '#888',
+    fontSize: '14px',
+    color: '#ccc',
   },
   subMenu: {
     backgroundColor: '#111',
@@ -218,7 +218,7 @@ const styles = {
     padding: '10px 16px 10px 42px',
     cursor: 'pointer',
     color: '#fff',
-    fontSize: '15px',
+    fontSize: '17px',
     borderBottom: '1px solid #222',
     transition: 'background 0.2s',
   },
