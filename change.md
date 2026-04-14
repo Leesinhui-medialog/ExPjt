@@ -1556,6 +1556,22 @@
 
 ---
 
+### 194. 좌측 메뉴 폰트 크기 한 단계 확대
+
+| 질의 | LeftMenu.jsx의 글자 크기를 모두 한 단계 위로 올려 달라 |
+|------|----------------------------------------------|
+| 결과 | `LeftMenu.jsx` 스타일 폰트 크기 전체 2px씩 확대. 사이드바 기본 16→18px, 사용자명 17→19px, 이메일 13→15px, NAVIGATION 라벨 13→15px, 메뉴 아이콘 20→22px, 화살표 12→14px, 하위 메뉴 15→17px. |
+
+---
+
+### 195. ExPjt_개발가이드.docx에 Git Repository 정보 추가
+
+| 질의 | git Repository 정보를 ExPjt_개발가이드.docx에 추가, 계정은 sinhuiyo@medialog.co.kr, 비밀번호는 앞자리 4자리+자리수(*) 표시 요청 |
+|------|----------------------------------------------------------------------------------------------------------|
+| 결과 | `generate-guide.js`에 "8. Git Repository 정보" 섹션 추가. 8.1 저장소 정보(Repository URL: https://github.com/Leesinhui-medialog/ExPjt.git, 플랫폼: GitHub, 브랜치: master), 8.2 계정 정보(이메일: sinhuiyo@medialog.co.kr, 비밀번호: sinh**************), 8.3 Git 명령어(clone/add/commit/push). DOCX 재생성 완료. |
+
+---
+
 ## 현재 프로젝트 구조
 
 ```

@@ -305,6 +305,37 @@ const doc = new Document({
       bullet("LayerPopup: alert/confirm 대체 레이어 팝업 (confirmOnly 옵션)", "bullets"),
       bullet("FileIcon: 파일 확장자별 아이콘 표시 (Word, Excel, PPT, PDF, 이미지, 기타)", "bullets"),
       bullet("LoadingBar: 오버레이 + 스피너 로딩 표시", "bullets"),
+
+      new Paragraph({ children: [new PageBreak()] }),
+
+      // ===== 8. Git Repository 정보 =====
+      heading("8. Git Repository 정보", HeadingLevel.HEADING_1),
+      heading("8.1 저장소 정보", HeadingLevel.HEADING_2),
+      new Table({
+        width: { size: 9506, type: WidthType.DXA },
+        columnWidths: [2800, 6706],
+        rows: [
+          new TableRow({ children: [headerCell("항목", 2800), headerCell("내용", 6706)] }),
+          new TableRow({ children: [cell("Repository URL", 2800, altShading), cell("https://github.com/Leesinhui-medialog/ExPjt.git", 6706, altShading)] }),
+          new TableRow({ children: [cell("플랫폼", 2800), cell("GitHub", 6706)] }),
+          new TableRow({ children: [cell("브랜치", 2800, altShading), cell("master", 6706, altShading)] }),
+        ]
+      }),
+      heading("8.2 계정 정보", HeadingLevel.HEADING_2),
+      new Table({
+        width: { size: 9506, type: WidthType.DXA },
+        columnWidths: [2800, 6706],
+        rows: [
+          new TableRow({ children: [headerCell("항목", 2800), headerCell("내용", 6706)] }),
+          new TableRow({ children: [cell("이메일", 2800, altShading), cell("sinhuiyo@medialog.co.kr", 6706, altShading)] }),
+          new TableRow({ children: [cell("비밀번호", 2800), cell("sinh**************", 6706)] }),
+        ]
+      }),
+      heading("8.3 Git 명령어", HeadingLevel.HEADING_2),
+      bullet("git clone https://github.com/Leesinhui-medialog/ExPjt.git", "bullets"),
+      bullet("git add .", "bullets"),
+      bullet("git commit -m \"커밋 메시지\"", "bullets"),
+      bullet("git push origin master", "bullets"),
     ]
   }]
 });
