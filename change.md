@@ -1444,7 +1444,15 @@
 
 ---
 
-### 180. @author Unknown → sinhuiyo 일괄 변경
+### 180. Steering 파일명 한글로 변경
+
+| 질의 | expjt-java-rules → Java개발규칙, expjt-rules → 공통개발규칙, expjt-xml-rules → Xml개발규칙으로 이름 변경 요청 |
+|------|----------------------------------------------------------------------------------------------|
+| 결과 | `.kiro/steering/` 하위 Steering 파일 3개 이름 변경 완료. `expjt-rules.md` → `공통개발규칙.md`, `expjt-java-rules.md` → `Java개발규칙.md`, `expjt-xml-rules.md` → `Xml개발규칙.md`. 파일 내용 및 fileMatch 설정은 기존과 동일하게 유지. |
+
+---
+
+### 181. @author Unknown → sinhuiyo 일괄 변경
 
 | 질의 | @author Unknown으로 되어 있는 부분을 Kiro 로그인 계정(sinhuiyo)으로 변경 요청 |
 |------|------------------------------------------------------------------|
