@@ -1268,6 +1268,38 @@
 
 ---
 
+### 158. Git Author identity 설정
+
+| 질의 | `Author identity unknown` 오류 해결 요청 |
+|------|--------------------------------------|
+| 결과 | Git 사용자 정보 미설정 상태. `git config user.email "sinhuiyo@medialog.co.kr"`, `git config user.name "Leesinhui-medialog"` 설정 후 `git commit` → `git push -u origin main --force` 실행 안내. |
+
+---
+
+### 159. web-calendar-dday spec 삭제
+
+| 질의 | specs의 web-calendar-dday 삭제 요청 |
+|------|----------------------------------|
+| 결과 | `.kiro/specs/web-calendar-dday/` 하위 파일 4개 삭제 완료 (design.md, .config.kiro, tasks.md, requirements.md). |
+
+---
+
+### 160. web-calendar-dday 폴더 삭제
+
+| 질의 | web-calendar-dday 빈 폴더 삭제 요청 |
+|------|----------------------------------|
+| 결과 | `.kiro/specs/web-calendar-dday/` 폴더 삭제 완료. |
+
+---
+
+### 161. Git push 안내
+
+| 질의 | 변경 내역을 Git에 push 요청 |
+|------|------------------------|
+| 결과 | Git 규칙에 따라 수작업 진행 안내. `git add .` → `git commit -m "변경 내역 반영"` → `git push -u origin main`. 초기 push 미완료 시 `--force` 옵션 추가. |
+
+---
+
 ## 현재 프로젝트 구조
 
 ```
