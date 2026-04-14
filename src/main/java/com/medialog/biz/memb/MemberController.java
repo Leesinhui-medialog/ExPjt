@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,7 @@ import java.util.Map;
  * @ai-generated
  * @generator Kiro
  * @author sinhuiyo
- * @line Kiro Edit Line : 82, Total Code Line : 82
+ * @line Kiro Edit Line : 111, Total Code Line : 111
  */
 @Slf4j
 @RestController
@@ -46,6 +47,51 @@ public class MemberController {
     public ResponseEntity<List<Member>> list() {
         log.info("회원 목록 조회 요청");
         return ResponseEntity.ok(memberService.list());
+    }
+
+    /**
+     * 이메일로 회원 상세 정보를 조회한다.
+     *
+     * @param email 이메일 주소
+     * @return 회원 정보
+     */
+    @GetMapping("/detail")
+    public ResponseEntity<Member> retrieveDetail(@RequestParam String email) {
+        log.info("회원 상세 조회 요청 - email: {}", email);
+        Member member = memberService.retrieveByEmail(email);
+        if (member == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(member);
+    }
+
+    /**
+     * 회원 프로필(이름, 전화번호)을 수정한다.
+     *
+     * @param params 이메일(email), 이름(memberName), 전화번호(telephoneNumber)
+     * @return 수정 결과
+     */
+    @PutMapping("/update-profile")
+    public ResponseEntity<Map<String, Object>> updateProfile(@RequestBody Map<String, String> params) {
+        String email = params.get("email");
+        String memberName = params.get("memberName");
+        String telephoneNumber = params.get("telephoneNumber");
+        String birthDate = params.get("birthDate");
+        log.info("회원 프로필 수정 요청 - email: {}", email);
+        return ResponseEntity.ok(memberService.updateProfile(email, memberName, telephoneNumber, birthDate));
+    }
+
+    /**
+     * 회원 비밀번호를 변경한다.
+     *
+     * @param params 이메일(email), 현재 비밀번호(currentPassword), 새 비밀번호(newPassword)
+     * @return 변경 결과
+     */
+    @PutMapping("/change-password")
+    public ResponseEntity<Map<String, Object>> changePassword(@RequestBody Map<String, String> params) {
+        String email = params.get("email");
+        String currentPassword = params.get("currentPassword");
+        String newPassword = params.get("newPassword");
+        log.info("비밀번호 변경 요청 - email: {}", email);
+        return ResponseEntity.ok(memberService.changePassword(email, currentPassword, newPassword));
     }
 
     /**

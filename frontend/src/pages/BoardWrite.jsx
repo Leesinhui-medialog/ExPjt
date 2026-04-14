@@ -39,7 +39,7 @@ export default function BoardWrite() {
         <label htmlFor="description">{msg.labelContent}</label>
         <textarea id="description" value={description} onChange={e=>setDescription(e.target.value)} placeholder={msg.placeholderContent} required />
 
-        <div className="btn-group">
+        <div className="btn-group" style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
           <button type="submit" className="btn-submit">{msg.btnSubmit}</button>
           <button type="button" className="btn-cancel" onClick={()=>navigate('/board/list')}>{msg.btnCancel}</button>
         </div>

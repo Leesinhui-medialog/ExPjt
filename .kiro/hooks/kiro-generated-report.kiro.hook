@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Kiro 생성 코드 리포트",
+  "description": "커밋 전 실행하여 프로젝트 내 Java 파일에서 @author, @line Kiro Edit Line 정보를 추출하고 kiro-generated.md 파일로 생성합니다.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "프로젝트의 모든 Java 파일(src/main/java 및 src/test/java)을 검색하여 다음 정보를 추출하고 kiro-generated.md 파일을 생성해주세요:\n\n1. 각 Java 파일에서 `@author`가 포함된 라인을 찾아 작성자 정보를 추출\n2. 각 Java 파일에서 `@line Kiro Edit Line`이 포함된 라인을 찾아 Kiro 생성/수정 라인수와 전체 코드 라인수를 추출\n3. 각 파일의 마지막 수정 날짜를 확인\n\n추출한 정보를 아래 형식으로 kiro-generated.md 파일에 작성:\n\n```\n# Kiro 생성 코드 리포트\n\n생성일: {현재 날짜}\n\n## 파일 목록\n\n| 파일명 | 작성자 | Kiro Edit Line | Total Code Line | 날짜 |\n|--------|--------|---------------|-----------------|------|\n| {파일 경로} | {author} | {edit line} | {total line} | {날짜} |\n\n---\n\nKiro Total Edit Line : {Kiro Edit Line 숫자 합산값}\nFile Total Line : {Total Code Line 숫자 합산값}\n```\n\n중요 규칙:\n1. 기존 kiro-generated.md 파일이 있으면 먼저 읽어서 기존 테이블의 파일 목록을 확인합니다. 동일한 파일명이 이미 존재하면 해당 라인을 삭제하고 새로 추출한 정보로 교체합니다. 새로운 파일은 테이블에 추가합니다.\n2. 파일 목록 테이블의 모든 행에서 Kiro Edit Line 컬럼의 숫자를 합산하여 파일 하단에 'Kiro Total Edit Line : {합산값}'으로 표시합니다.\n3. 파일 목록 테이블의 모든 행에서 Total Code Line 컬럼의 숫자를 합산하여 파일 하단에 'File Total Line : {합산값}'으로 표시합니다.\n4. 하단에 'Kiro Total Edit Line'과 'File Total Line' 문구가 이미 존재하면 숫자만 업데이트합니다. 존재하지 않으면 새로 추가합니다.\n5. 생성일은 현재 날짜로 업데이트합니다."
+  }
+}

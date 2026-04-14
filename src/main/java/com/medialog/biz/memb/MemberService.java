@@ -40,6 +40,72 @@ public class MemberService {
     }
 
     /**
+     * 이메일로 회원을 조회한다.
+     *
+     * @param email 이메일 주소
+     * @return 회원 엔티티, 없으면 {@code null}
+     */
+    public Member retrieveByEmail(String email) {
+        log.info("이메일로 회원 조회 - email: {}", email);
+        return memberRepository.findByEmail(email);
+    }
+
+    /**
+     * 회원 프로필(이름, 전화번호)을 수정한다.
+     *
+     * @param email 이메일 주소
+     * @param memberName 변경할 이름
+     * @param telephoneNumber 변경할 전화번호
+     * @return 수정 결과
+     */
+    public java.util.Map<String, Object> updateProfile(String email, String memberName, String telephoneNumber, String birthDate) {
+        log.info("회원 프로필 수정 - email: {}", email);
+        java.util.Map<String, Object> result = new java.util.HashMap<>();
+        Member member = memberRepository.findByEmail(email);
+        if (member == null) {
+            result.put("success", false);
+            result.put("message", "회원 정보를 찾을 수 없습니다.");
+            return result;
+        }
+        member.setMemberName(memberName);
+        member.setTelephoneNumber(telephoneNumber);
+        member.setBirthDate(birthDate);
+        memberRepository.save(member);
+        log.info("회원 프로필 수정 완료 - email: {}", email);
+        result.put("success", true);
+        return result;
+    }
+
+    /**
+     * 회원 비밀번호를 변경한다.
+     *
+     * @param email 이메일 주소
+     * @param currentPassword 현재 비밀번호
+     * @param newPassword 새 비밀번호
+     * @return 변경 결과
+     */
+    public java.util.Map<String, Object> changePassword(String email, String currentPassword, String newPassword) {
+        log.info("비밀번호 변경 - email: {}", email);
+        java.util.Map<String, Object> result = new java.util.HashMap<>();
+        Member member = memberRepository.findByEmail(email);
+        if (member == null) {
+            result.put("success", false);
+            result.put("message", "회원 정보를 찾을 수 없습니다.");
+            return result;
+        }
+        if (!currentPassword.equals(member.getPassword())) {
+            result.put("success", false);
+            result.put("message", "현재 비밀번호가 일치하지 않습니다.");
+            return result;
+        }
+        member.setPassword(newPassword);
+        memberRepository.save(member);
+        log.info("비밀번호 변경 완료 - email: {}", email);
+        result.put("success", true);
+        return result;
+    }
+
+    /**
      * 이메일 중복 여부를 확인한다.
      *
      * @param email 확인할 이메일 주소

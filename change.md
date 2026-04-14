@@ -1300,6 +1300,134 @@
 
 ---
 
+### 162. Git commit 시 특정 단어 포함 라인 추출 방법 안내
+
+| 질의 | commit 할 때 특정 단어가 포함된 라인 추출 가능 여부 |
+|------|-------------------------------------------|
+| 결과 | 가능. `git diff --cached -U0 | findstr "검색할단어"` 명령어로 스테이징된 변경 내용 중 특정 단어 포함 라인 추출. 예: `findstr "password"`, `findstr "TODO"`. Hook으로 자동화하여 커밋 전 민감 정보(password, secret, key 등) 경고도 가능. |
+
+---
+
+### 163. Kiro 생성 코드 리포트 Hook 생성
+
+| 질의 | git commit 시 파일명, @author, @line Kiro Edit Line, 날짜를 추출하여 kiro-generated.md 생성하는 Hook 요청 |
+|------|----------------------------------------------------------------------------------------------|
+| 결과 | `kiro-generated-report` Hook 생성(userTriggered). 실행 시 프로젝트 내 모든 Java 파일에서 `@author`, `@line Kiro Edit Line` 정보를 추출하여 `kiro-generated.md` 파일 생성. 요약(총 파일 수, Kiro 생성 라인 합계, 전체 코드 라인 합계) + 파일별 상세 테이블(파일명, 작성자, Edit Line, Total Line, 날짜) 포함. Explorer Agent Hooks에서 수동 실행. |
+
+---
+
+### 164. Kiro 생성 코드 리포트 Hook 중복 파일 처리 추가
+
+| 질의 | kiro-generated.md에 동일 파일명 존재 시 라인 삭제 후 새로 등록 요청 |
+|------|----------------------------------------------------------|
+| 결과 | `kiro-generated-report` Hook 프롬프트 수정. 기존 `kiro-generated.md` 파일이 있으면 먼저 읽어서 동일 파일명 라인 삭제 후 새 정보로 교체. 새 파일은 테이블에 추가. 요약 정보(총 파일 수, Kiro 생성 라인 합계, 전체 코드 라인 합계)도 최신 값으로 갱신. 생성일은 현재 날짜로 업데이트. |
+
+---
+
+### 165. 서버 재시작
+
+| 질의 | 서버 실행 요청 |
+|------|--------------|
+| 결과 | 기존 서버 프로세스 종료 후 `gradlew.bat bootRun` 재시작. Tomcat 포트 8080 정상 기동, BizApplication 약 5.6초 내 시작 완료. |
+
+---
+
+### 166. 프론트엔드 서버 실행 안내
+
+| 질의 | 프론트엔드 실행 요청 |
+|------|-----------------|
+| 결과 | Kiro 내부 터미널에서 `spawn EPERM` 권한 오류로 실행 불가. 외부 터미널에서 `cd C:\workspace\ExPjt\frontend` → `npm run dev` 직접 실행 안내. |
+
+---
+
+### 167. BoardWrite 등록/취소 버튼 중앙 정렬
+
+| 질의 | BoardWrite 파일의 등록/취소 버튼 중앙 정렬 요청 |
+|------|----------------------------------------|
+| 결과 | `BoardWrite.jsx` 버튼 그룹에 `display: flex; justifyContent: center; gap: 8px` 적용하여 중앙 정렬. |
+
+---
+
+### 168. Kiro 생성 코드 리포트 Hook 합산 기능 추가
+
+| 질의 | kiro-generated.md 하단에 Kiro Edit Line 합산값, Total Code Line 합산값 추가/업데이트 요청 |
+|------|-----------------------------------------------------------------------------|
+| 결과 | `kiro-generated-report` Hook 프롬프트 수정. 파일 목록 테이블의 Kiro Edit Line 숫자 합산 → `Kiro Total Edit Line : {합산값}`, Total Code Line 숫자 합산 → `File Total Line : {합산값}`을 파일 하단에 표시. 해당 문구 미존재 시 새로 추가, 존재 시 숫자만 업데이트. 요약 섹션 제거하고 하단 합산으로 대체. |
+
+---
+
+### 169. 로그인 사용자명 드롭다운 메뉴 추가
+
+| 질의 | 로그인 후 사용자이름 부분에 드롭다운 메뉴(개인정보 변경, 비밀번호 변경) 추가 요청 |
+|------|------------------------------------------------------------------|
+| 결과 | `App.jsx` TopHeader에 드롭다운 메뉴 구현. 사용자명 클릭 시 `▾` 표시와 함께 드롭다운 표시. 메뉴 항목: 개인정보 변경, 비밀번호 변경(현재 준비 중 alert). 외부 클릭 시 자동 닫힘(`document.addEventListener` 활용). |
+
+---
+
+### 170. 개인정보 변경 페이지 구현 및 드롭다운 연결
+
+| 질의 | App.jsx 개인정보 변경 클릭 시 사용자 정보 변경 화면 연결 요청 |
+|------|--------------------------------------------------|
+| 결과 | 프론트엔드: `MemberEdit.jsx` 생성 — 로그인 사용자의 이메일(읽기전용), 이름, 생년월일(읽기전용), 전화번호 표시/수정. 저장 시 `PUT /api/member/update-profile` API 호출. 백엔드: `MemberController`에 `GET /api/member/detail`(이메일로 회원 조회), `PUT /api/member/update-profile`(이름/전화번호 수정) API 추가. `MemberService`에 `retrieveByEmail`, `updateProfile` 메소드 추가. `App.jsx`: 드롭다운 "개인정보 변경" 클릭 시 `/member/edit`로 이동, `ProtectedRoute` 적용. |
+
+---
+
+### 171. 비밀번호 변경 페이지 구현 및 드롭다운 연결
+
+| 질의 | App.jsx 비밀번호 변경 클릭 시 비밀번호 변경 화면 연결 요청 |
+|------|--------------------------------------------------|
+| 결과 | 프론트엔드: `PasswordChange.jsx` 생성 — 현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 입력. 현재/새 비밀번호 동일 여부, 확인 일치 여부 검증. `PUT /api/member/change-password` API 호출. 백엔드: `MemberController`에 `PUT /api/member/change-password` API 추가. `MemberService`에 `changePassword` 메소드 추가 — 현재 비밀번호 일치 확인 후 새 비밀번호로 변경. `App.jsx`: 드롭다운 "비밀번호 변경" 클릭 시 `/member/password`로 이동, `ProtectedRoute` 적용. |
+
+---
+
+### 172. 개인정보 변경 전 비밀번호 확인 레이어 추가
+
+| 질의 | 개인정보 변경 클릭 시 비밀번호 확인 confirm 레이어 화면 추가, 확인 후 개인정보 변경 이동 요청 |
+|------|-------------------------------------------------------------------------|
+| 결과 | `App.jsx` TopHeader에 비밀번호 확인 레이어 팝업 추가. 드롭다운 "개인정보 변경" 클릭 → 비밀번호 입력 팝업 표시 → `POST /api/login` API로 비밀번호 검증 → 일치 시 `/member/edit`로 이동, 불일치 시 "비밀번호가 일치하지 않습니다." 안내. Enter 키 확인 지원. |
+
+---
+
+### 173. MemberEdit 로그인 정보 기반 데이터 채움 확인 + 서버 재시작
+
+| 질의 | MemberEdit.jsx에 이름, 생년월일을 로그인 정보 기준으로 채워 넣기 요청 + 서버 재시작 |
+|------|-------------------------------------------------------------------------|
+| 결과 | 확인 결과 이미 구현 완료 상태. `/api/login/check`로 이메일 조회 → `/api/member/detail`로 회원 상세(이름, 생년월일, 전화번호) 조회하여 자동 채움. 서버 재시작하여 새 API 반영. Tomcat 포트 8080 정상 기동, BizApplication 약 4.3초 내 시작 완료. |
+
+---
+
+### 174. MemberEdit 생년월일 변경 가능 + 달력 선택
+
+| 질의 | MemberEdit.jsx 생년월일을 변경 가능하게 하고 달력으로 선택 가능하게 요청 |
+|------|----------------------------------------------------------|
+| 결과 | `MemberEdit.jsx` 생년월일 input을 `disabled` 제거 + `type="date"` 적용하여 달력 선택 가능. 저장 시 `birthDate`도 함께 전송. 백엔드: `MemberController.updateProfile`에 `birthDate` 파라미터 추가. `MemberService.updateProfile`에 `member.setBirthDate(birthDate)` 추가하여 DB 저장. |
+
+---
+
+### 175. Kiro 생성 코드 리포트 Hook 실행 및 commit 방법 안내
+
+| 질의 | kiro-generated-report Hook이 실행되도록 commit 진행 방법 요청 |
+|------|------------------------------------------------------|
+| 결과 | `userTriggered` Hook은 git commit과 자동 연동 안 됨. 실행 순서: (1) Explorer "Agent Hooks" 섹션에서 "Kiro 생성 코드 리포트" ▶ 실행 버튼 클릭 → `kiro-generated.md` 자동 생성. (2) 터미널에서 `git add .` → `git commit` → `git push origin main`. Hook 실행 → commit → push 순서로 수동 진행. |
+
+---
+
+### 176. Git commit/push 안내
+
+| 질의 | git add, commit, push 실행 요청 |
+|------|------------------------------|
+| 결과 | Git 규칙에 따라 수작업 진행 안내. `git add .` → `git commit -m "개인정보 변경 / 비밀번호 변경 처리"` → `git push origin main` 터미널에서 직접 실행. |
+
+---
+
+### 177. 새 터미널 생성 방법 안내
+
+| 질의 | 새 터미널 생성 요청 |
+|------|-----------------|
+| 결과 | Kiro에서 새 터미널 열기: 키보드 단축키 `Ctrl+\`` 또는 상단 메뉴 Terminal → New Terminal 선택. |
+
+---
+
 ## 현재 프로젝트 구조
 
 ```
