@@ -1,0 +1,10 @@
+app:
+  upload:
+    root: C:/workspace/ExPjt/upload
+  messages:
+    mail-new-title: "게시물 신규등록"
+    mail-edit-title: "게시물 수정"
+    mail-warn-fail: "게시물 알림 메일 발송 실패: {}"
+    mail-receiver: "sinhuiyo@medialog.co.kr"
+    mail-send-ok: "메일이 발송되었습니다."
+    upload-empty: "업로드할 파일이 없습니다."

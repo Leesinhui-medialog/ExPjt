@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>게시판 목록</title>
+    <link rel="stylesheet" href="/css/common.css"/>
+</head>
+<body>
+    <h1>게시판 목록</h1>
+    <div class="text-right mb-12">
+        <a href="/board/write" class="btn-link">글쓰기</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>등록일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="board : ${boards}">
+                <td th:text="${board.idx}"></td>
+                <td>
+                    <span th:if="${board.filePath != null and !board.filePath.isEmpty()}" class="file-icon"
+                          th:with="fp=${board.filePath.toLowerCase()}">
+                        <span th:if="${fp.endsWith('.doc') or fp.endsWith('.docx')}" title="Word">📝</span>
+                        <span th:if="${fp.endsWith('.xls') or fp.endsWith('.xlsx')}" title="Excel">📊</span>
+                        <span th:if="${fp.endsWith('.ppt') or fp.endsWith('.pptx')}" title="PowerPoint">📙</span>
+                        <span th:if="${fp.endsWith('.pdf')}" title="PDF">📕</span>
+                        <span th:if="${fp.endsWith('.jpg') or fp.endsWith('.jpeg') or fp.endsWith('.png') or fp.endsWith('.gif') or fp.endsWith('.bmp') or fp.endsWith('.svg') or fp.endsWith('.webp')}" title="이미지">🖼️</span>
+                        <span th:if="${!(fp.endsWith('.doc') or fp.endsWith('.docx') or fp.endsWith('.xls') or fp.endsWith('.xlsx') or fp.endsWith('.ppt') or fp.endsWith('.pptx') or fp.endsWith('.pdf') or fp.endsWith('.jpg') or fp.endsWith('.jpeg') or fp.endsWith('.png') or fp.endsWith('.gif') or fp.endsWith('.bmp') or fp.endsWith('.svg') or fp.endsWith('.webp'))}" title="파일">📎</span>
+                    </span>
+                    <a th:href="@{/board/edit(idx=${board.idx})}" th:text="${board.title}"></a>
+                </td>
+                <td th:text="${board.description}"></td>
+                <td th:text="${board.regDate}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(boards)}">
+                <td colspan="4" class="empty">등록된 게시글이 없습니다.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 페이징 -->
+    <div class="paging">
+        <a th:if="${currentPage > 0}"
+           th:href="@{/board/list(page=${currentPage - 1}, size=10)}">&laquo; 이전</a>
+
+        <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a th:href="@{/board/list(page=${i}, size=10)}"
+               th:text="${i + 1}"
+               th:classappend="${i == currentPage} ? 'active'"></a>
+        </th:block>
+
+        <a th:if="${currentPage < totalPages - 1}"
+           th:href="@{/board/list(page=${currentPage + 1}, size=10)}">다음 &raquo;</a>
+    </div>
+</body>
+</html>

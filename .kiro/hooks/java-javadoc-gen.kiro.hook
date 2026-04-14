@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "JavaDoc 자동 생성",
+  "description": "Java 파일 저장 시 클래스/인터페이스 레벨에 @ai-generated, @generator Kiro, @author Javadoc이 없으면 추가하고, public 메서드에 Javadoc이 없으면 생성/업데이트합니다.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.java"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "이 Java 파일의 클래스/인터페이스 선언 위에 Javadoc이 없으면 /** @ai-generated @generator Kiro @author {현재 Kiro 로그인 계정 또는 시스템 사용자명} @line Kiro Edit Line : {Kiro가 자동 생성/수정한 라인수}, Total Code Line : {파일 전체 코드 라인수} */ 형식으로 추가하세요. 또한 Javadoc이 없는 public 메서드에 대해 파라미터, 반환값, 설명을 포함한 Javadoc을 생성하세요. 이미 있는 Javadoc은 수정하지 마세요."
+  }
+}

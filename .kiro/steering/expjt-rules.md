@@ -1,0 +1,54 @@
+# ExPjt 프로젝트 규칙
+
+## 프로젝트 설명
+미디어로그에서 필요로 하는 Kiro의 Hook, Steering, Power 기능에 대한 가이드를 만드는 프로젝트.
+Spring Boot + React 기반 샘플 애플리케이션을 구축하면서 각 기능의 활용법을 실습하고 문서화한다.
+
+## 프로젝트 개요
+- Spring Boot 3.4.4 + Java 17 + Gradle 기반 웹 애플리케이션
+- 프론트엔드: React (Vite)
+- DB: H2 인메모리 (개발), JPA/Hibernate
+- 패키지: `com.medialog.biz`
+
+## React (프론트엔드)
+- 경로: `frontend/src/`
+- 페이지 컴포넌트: `frontend/src/pages/`
+- 공통 컴포넌트: `frontend/src/components/`
+- API 호출은 Vite 프록시(`/api` → `localhost:8080`) 사용
+
+## 빌드/실행
+- 백엔드: `.\gradlew.bat bootRun`
+- 프론트엔드: `npm run dev` (frontend 폴더)
+- 테스트: `.\gradlew.bat test`
+
+## 언어 규칙
+- 모든 답변, 응답, 문서, 주석, 커밋 메시지 등 모든 텍스트는 한글로 작성한다
+- 코드 내 변수명, 클래스명 등 프로그래밍 식별자는 영문 허용
+
+## 업무코드 목록
+| 업무코드 구분 | 업무코드 | 패키지명 | 설명 |
+|-------------|---------|---------|------|
+| 계정 | ACCT | acct | Account |
+| 고객지원 | CUSP | cusp | Customer Support |
+| 권한 | AUTH | auth | Authority |
+| 로그인 | LGIN | lgin | Login |
+| 메인 | MAIN | main | Main |
+| 개통 | OPEN | open | Opening |
+| 요금제 | PRPL | prpl | Price Plan |
+| 유심구매 | USBY | usby | USIM Buy |
+| 컨텐츠 | CNTN | cntn | Contents |
+| 통계 | STAT | stat | Statistics |
+| 공통 | COMM | comm | Common |
+| 게시판 | BORD | bord | Board |
+| 메일 | MAIL | mail | Mail Send |
+| 회원 | MEMB | memb | Member |
+
+## 파일 변경 규칙
+- 현재 에디터에 열려져 있지 않은 소스 파일을 변경할 때는 반드시 사용자에게 문의 후 진행한다
+- 열려 있는 파일만 바로 수정 가능
+
+## Git 규칙
+- git commit, git push는 명령어로 자동 실행하지 않고 반드시 사용자가 수작업으로 진행한다
+
+## Python 관련
+- 이 프로젝트는 Java/Spring Boot 프로젝트이므로 Python/uv 관련 규칙은 적용하지 않음

@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "name": "change log",
+  "description": "질의한 내용과 결과를 로그에 기록한다.",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "질의한 내용과 결과에 대해서 change.md 파일에 로그로 남겨 줘"
+  }
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>게시글 수정</title>
+    <link rel="stylesheet" href="/css/common.css"/>
+</head>
+<body class="container-narrow">
+    <h1>게시글 수정</h1>
+    <form id="editForm" th:action="@{/board/edit}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idx" th:value="${board.idx}"/>
+        <input type="hidden" name="regDate" th:value="${board.regDate}"/>
+
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" th:value="${board.title}" required style="ime-mode: active;"/>
+
+        <label>첨부파일</label>
+        <div th:if="${board.filePath != null and !board.filePath.isEmpty()}" class="file-info">
+            📎 <a th:data-url="@{/api/upload/download(filePath=${board.filePath}, originalName=${board.originalFileName})}"
+                  th:text="${board.originalFileName != null ? board.originalFileName : board.filePath}"
+                  style="color: #4a7cff; text-decoration: underline; cursor: pointer;"
+                  onclick="event.preventDefault(); var a=this; fetch(a.dataset.url,{method:'HEAD'}).then(function(r){if(r.ok){window.location.href=a.dataset.url;}else{LayerPopup.alert('첨부파일을 찾을 수 없습니다.');}}).catch(function(){LayerPopup.alert('첨부파일을 찾을 수 없습니다.');});"></a>
+            <input type="hidden" name="filePath" th:value="${board.filePath}"/>
+            <input type="hidden" name="originalFileName" th:value="${board.originalFileName}"/>
+        </div>
+        <div th:if="${board.filePath == null or board.filePath.isEmpty()}" class="file-none">
+            첨부파일 없음
+        </div>
+        <input type="file" id="file" name="file"/>
+        <span class="file-hint">새 파일을 선택하면 기존 파일이 교체됩니다.</span>
+
+        <label for="description">내용</label>
+        <textarea id="description" name="description" required th:text="${board.description}"></textarea>
+
+        <div class="btn-group">
+            <button type="button" class="btn-submit" onclick="submitEdit()">수정</button>
+            <a href="/board/list"><button type="button" class="btn-cancel">취소</button></a>
+            <button type="button" class="btn-delete"
+                    onclick="LayerPopup.confirm('정말 삭제하시겠습니까?').then(function(ok){if(ok){document.getElementById('deleteForm').submit();}});">삭제</button>
+        </div>
+    </form>
+    <form id="deleteForm" th:action="@{/board/delete}" method="post" style="display:none;">
+        <input type="hidden" name="idx" th:value="${board.idx}"/>
+    </form>
+    <div th:replace="~{common/popup :: popup}"></div>
+    <script>
+        // 초기값 저장
+        var _origTitle = document.getElementById('title').value;
+        var _origDesc = document.getElementById('description').value;
+        var _origFile = document.getElementById('file');
+
+        function hasChanges() {
+            if (document.getElementById('title').value !== _origTitle) return true;
+            if (document.getElementById('description').value !== _origDesc) return true;
+            if (_origFile.files && _origFile.files.length > 0) return true;
+            return false;
+        }
+
+        function submitEdit() {
+            if (!hasChanges()) {
+                LayerPopup.confirm('변경 내용이 없습니다. 그래도 저장하시겠습니까?').then(function(ok) {
+                    if (ok) document.getElementById('editForm').submit();
+                });
+            } else {
+                document.getElementById('editForm').submit();
+            }
+        }
+    </script>
+</body>
+</html>

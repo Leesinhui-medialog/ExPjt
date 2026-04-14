@@ -1,0 +1,207 @@
+/* ===== 공통 기본 스타일 ===== */
+body {
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    margin: 40px auto;
+    padding: 0 24px;
+    color: #222;
+}
+
+h1 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+}
+
+a {
+    color: #4a7cff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== 폼 공통 ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+}
+
+input, textarea {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #4a7cff;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* ===== 버튼 공통 ===== */
+.btn-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-submit {
+    background: #4a7cff;
+    color: #fff;
+}
+
+.btn-submit:hover {
+    background: #3a6ae8;
+}
+
+.btn-cancel {
+    background: #f0f0f0;
+    color: #555;
+}
+
+.btn-cancel:hover {
+    background: #e0e0e0;
+}
+
+.btn-delete {
+    background: #e05252;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #c93c3c;
+}
+
+.btn-link {
+    padding: 8px 16px;
+    background: #4a7cff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.btn-link:hover {
+    background: #3a6ae8;
+    text-decoration: none;
+}
+
+/* ===== 테이블 공통 ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background: #f5f5f5;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+td {
+    font-size: 0.9rem;
+}
+
+tr:hover td {
+    background: #f9f9ff;
+}
+
+.empty {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
+
+/* ===== 페이징 ===== */
+.paging {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 20px;
+}
+
+.paging a {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #555;
+    font-size: 0.85rem;
+}
+
+.paging a.active {
+    border-color: #4a7cff;
+    background: #4a7cff;
+    color: #fff;
+}
+
+/* ===== 첨부파일 정보 ===== */
+.file-info {
+    font-size: 0.85rem;
+    color: #555;
+    padding: 4px 0;
+}
+
+.file-none {
+    font-size: 0.85rem;
+    color: #999;
+    padding: 4px 0;
+}
+
+.file-hint {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+/* ===== 파일 아이콘 ===== */
+.file-icon {
+    margin-right: 4px;
+    font-size: 0.85rem;
+}
+
+/* ===== 레이아웃 ===== */
+.container-narrow {
+    max-width: 600px;
+}
+
+.container-wide {
+    max-width: 800px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mb-12 {
+    margin-bottom: 12px;
+}

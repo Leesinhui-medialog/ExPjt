@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Java 코드 포맷 검사",
+  "description": "Java 파일이 저장될 때 프로젝트 코딩 규칙(Javadoc, 금지 어노테이션, 네이밍 규칙, 주석, 소프트 삭제 등)을 자동으로 검사합니다.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.java"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "편집된 Java 파일에 대해 다음 프로젝트 코딩 규칙을 검사하고, 위반 사항이 있으면 알려주세요:\n\n1. **금지 어노테이션 사용 여부**: `@AllArgsConstructor`, `@RequiredArgsConstructor`, `@Data`, `@Value`, `@Cleanup`, `@SneakyThrows`, `@Synchronized` 사용 금지\n2. **VO 전용 어노테이션**: `@Getter`, `@Setter`, `@ToString`, `@EqualsAndHashCode`는 VO 클래스에서만 사용 가능\n3. **@Slf4j 등록 여부**: 클래스에 `@Slf4j` 어노테이션이 있는지 확인\n4. **Javadoc 존재 여부**: 클래스와 public 메소드에 Javadoc이 작성되어 있는지 확인\n5. **메소드 네이밍 규칙**: 메소드 접두어가 retrieve/create/update/delete/save/export 규칙을 따르는지 확인\n6. **패키지 구조**: `com.medialog.biz.{업무코드}` 구조를 따르는지 확인\n7. **주석 충실도**: 코드에 주석이 상세히 기술되어 있는지 확인\n8. **하드코딩된 민감 정보**: 소스코드에 비밀번호, API 키 등 민감 정보가 하드코딩되어 있지 않은지 확인\n\n위반 사항이 발견되면 해당 라인과 수정 방법을 구체적으로 안내해주세요. 위반이 없으면 간단히 \"코드 포맷 검사 통과\"라고 알려주세요."
+  }
+}

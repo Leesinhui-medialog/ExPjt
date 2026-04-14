@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Spring Boot 설정 검증",
+  "description": "Spring Boot 설정 파일(application.yml/properties) 변경 시 설정 값의 유효성을 검증합니다.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/application.yml",
+      "**/application.properties",
+      "**/application-*.yml",
+      "**/application-*.properties"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "이 Spring Boot 설정 파일의 변경 내용을 검토하세요. YAML/properties 문법 오류, 잘못된 속성명, 누락된 필수 설정, 보안 이슈(하드코딩된 비밀번호 등)가 있는지 확인하고 문제가 있으면 알려주세요."
+  }
+}

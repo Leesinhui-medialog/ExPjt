@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "JUnit 테스트 자동 생성",
+  "description": "Java 파일 저장 시 대응하는 JUnit 테스트 파일이 없으면 생성하고, 있으면 소스 변경에 맞게 업데이트합니다. Service는 Mockito 단위 테스트, Repository는 @DataJpaTest, Controller는 @WebMvcTest로 생성합니다.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.java"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "이 Java 파일이 src/main/java/ 하위에 있고 Entity/DTO가 아닌 경우, src/test/java/ 동일 패키지에 대응하는 JUnit 5 테스트 파일이 있는지 확인하세요. 없으면 생성하고, 있으면 소스 변경에 맞게 테스트를 업데이트하세요. Service는 Mockito, Repository는 @DataJpaTest, Controller는 @WebMvcTest를 사용하세요. 각 public 메소드에 최소 1개 테스트를 작성하세요."
+  }
+}
