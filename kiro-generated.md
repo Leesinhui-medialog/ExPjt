@@ -28,7 +28,6 @@
 | src/main/java/com/medialog/biz/memb/MemberController.java | 회원 REST 컨트롤러. | sinhuiyo | 111 | 111 | 2026-04-14 |
 | src/main/java/com/medialog/biz/memb/MemberRepository.java | 회원 리포지토리. | sinhuiyo | 28 | 28 | 2026-04-14 |
 | src/main/java/com/medialog/biz/memb/MemberService.java | 회원 서비스. | sinhuiyo | 80 | 80 | 2026-04-14 |
-
 | src/test/java/com/medialog/biz/BizApplicationTests.java | 애플리케이션 컨텍스트 로딩 테스트. | sinhuiyo | 21 | 21 | 2026-04-14 |
 | src/test/java/com/medialog/biz/bord/BoardControllerTest.java | 게시판 컨트롤러 테스트. | sinhuiyo | 70 | 70 | 2026-04-14 |
 | src/test/java/com/medialog/biz/bord/BoardRepositoryTest.java | 게시판 리포지토리 테스트. | sinhuiyo | 90 | 90 | 2026-04-14 |
