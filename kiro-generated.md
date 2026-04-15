@@ -7,7 +7,7 @@
 | 파일명 | 설명 | 작성자 | Kiro Edit Line | Total Code Line | 날짜 |
 |--------|------|--------|---------------|-----------------|------|
 | src/main/java/com/medialog/biz/BizApplication.java | Spring Boot 애플리케이션 메인 클래스. | sinhuiyo | 25 | 25 | 2026-04-14 |
-| src/main/java/com/medialog/biz/bord/Board.java | 게시판 엔티티 (VO). | sinhuiyo | 60 | 64 | 2026-04-15 |
+| src/main/java/com/medialog/biz/bord/Board.java | 게시판 엔티티 (VO). | sinhuiyo | <span style="color:red">**60**</span> | <span style="color:red">**64**</span> | 2026-04-15 |
 | src/main/java/com/medialog/biz/bord/BoardController.java | 게시판 REST 컨트롤러. | sinhuiyo | 152 | 152 | 2026-04-14 |
 | src/main/java/com/medialog/biz/bord/BoardRepository.java | 게시판 리포지토리. | sinhuiyo | 25 | 25 | 2026-04-14 |
 | src/main/java/com/medialog/biz/bord/BoardService.java | 게시판 서비스. | sinhuiyo | 162 | 162 | 2026-04-15 |
@@ -28,6 +28,7 @@
 | src/main/java/com/medialog/biz/memb/MemberController.java | 회원 REST 컨트롤러. | sinhuiyo | 111 | 111 | 2026-04-14 |
 | src/main/java/com/medialog/biz/memb/MemberRepository.java | 회원 리포지토리. | sinhuiyo | 28 | 28 | 2026-04-14 |
 | src/main/java/com/medialog/biz/memb/MemberService.java | 회원 서비스. | sinhuiyo | 80 | 80 | 2026-04-14 |
+
 | src/test/java/com/medialog/biz/BizApplicationTests.java | 애플리케이션 컨텍스트 로딩 테스트. | sinhuiyo | 21 | 21 | 2026-04-14 |
 | src/test/java/com/medialog/biz/bord/BoardControllerTest.java | 게시판 컨트롤러 테스트. | sinhuiyo | 70 | 70 | 2026-04-14 |
 | src/test/java/com/medialog/biz/bord/BoardRepositoryTest.java | 게시판 리포지토리 테스트. | sinhuiyo | 90 | 90 | 2026-04-14 |
@@ -48,5 +49,3 @@
 
 Kiro Total Edit Line : 2,823
 File Total Line : 2,827
-
-> ⚠️ <span style="color:red">**Kiro Total Edit Line(2,823)과 File Total Line(2,827)이 일치하지 않습니다.**</span> — Board.java에서 Kiro Edit Line(60)과 Total Code Line(64)의 차이(4줄)가 원인입니다.
