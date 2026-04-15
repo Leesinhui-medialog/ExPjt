@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Java 변경 시 JUnit 테스트",
+  "description": "Java 파일에 신규 메소드 생성이나 소스 변경이 있을 경우 해당 클래스의 대응 JUnit 테스트를 자동 실행합니다.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/main/java/**/*.java"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "변경된 Java 파일에 대응하는 JUnit 테스트 파일을 찾아서 실행해 주세요. 예: BoardService.java → BoardServiceTest.java. 테스트 파일이 없으면 생성 후 실행하세요. 테스트 실행 명령: .\\gradlew.bat test --tests \"{테스트클래스 풀패키지명}\". 결과를 한글로 요약해 주세요."
+  }
+}

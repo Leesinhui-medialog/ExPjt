@@ -2,10 +2,8 @@ package com.medialog.biz.lgin;
 
 import com.medialog.biz.memb.Member;
 import com.medialog.biz.memb.MemberRepository;
-import com.medialog.biz.mail.MailRequest;
-import com.medialog.biz.mail.MailService;
+import com.medialog.biz.mail.MailNotificationService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -26,21 +24,17 @@ import java.util.Random;
 public class LoginService {
 
     private final MemberRepository memberRepository;
-    private final MailService mailService;
-
-    /** 메일 발신자 주소 */
-    @Value("${spring.mail.username}")
-    private String mailSender;
+    private final MailNotificationService mailNotificationService;
 
     /**
      * 생성자 주입.
      *
      * @param memberRepository 회원 리포지토리
-     * @param mailService 메일 발송 서비스
+     * @param mailNotificationService 공통 메일 알림 서비스
      */
-    public LoginService(MemberRepository memberRepository, MailService mailService) {
+    public LoginService(MemberRepository memberRepository, MailNotificationService mailNotificationService) {
         this.memberRepository = memberRepository;
-        this.mailService = mailService;
+        this.mailNotificationService = mailNotificationService;
     }
 
     /**
@@ -101,19 +95,14 @@ public class LoginService {
         memberRepository.save(member);
         log.info("임시비밀번호 생성 완료 - email: {}", email);
 
-        /* 임시비밀번호 메일 발송 */
-        try {
-            MailRequest mail = new MailRequest();
-            mail.setTitle("임시비밀번호 안내");
-            mail.setSubject("[미디어로그] 임시비밀번호 안내");
-            mail.setSender(mailSender);
-            mail.setReceiver(email);
-            mail.setContent("임시비밀번호: " + temporaryPassword + "\n로그인 후 비밀번호를 변경해주세요.");
-            mailService.send(mail);
-            log.info("임시비밀번호 메일 발송 완료 - email: {}", email);
-        } catch (Exception e) {
-            log.warn("임시비밀번호 메일 발송 실패 - email: {}, error: {}", email, e.getMessage());
-        }
+        /* 임시비밀번호 메일 발송 (공통 메일 알림 서비스 사용) */
+        mailNotificationService.sendNotification(
+            "임시비밀번호 안내",
+            "[미디어로그] 임시비밀번호 안내",
+            "임시비밀번호: " + temporaryPassword + "\n로그인 후 비밀번호를 변경해주세요.",
+            email
+        );
+        log.info("임시비밀번호 메일 발송 요청 완료 - email: {}", email);
 
         result.put("success", true);
         result.put("message", "임시비밀번호가 이메일로 발송되었습니다.");

@@ -1,6 +1,7 @@
 package com.medialog.biz.bord;
 
 import com.medialog.biz.comm.FileUploadService;
+import com.medialog.biz.mail.MailNotificationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,14 +39,15 @@ class BoardServiceTest {
     private FileUploadService fileUploadService;
 
     @Mock
-    private BoardMailNotificationService boardMailNotificationService;
+    private MailNotificationService mailNotificationService;
 
     @InjectMocks
     private BoardService boardService;
 
     @BeforeEach
     void setUp() {
-        ReflectionTestUtils.setField(boardService, "mailWarnFail", "게시물 알림 메일 발송 실패: {}");
+        ReflectionTestUtils.setField(boardService, "mailNewTitle", "게시물 신규등록");
+        ReflectionTestUtils.setField(boardService, "mailEditTitle", "게시물 수정");
     }
 
     /** 전체 목록 조회 검증 */
@@ -112,7 +114,7 @@ class BoardServiceTest {
         verify(boardRepository).save(board);
     }
 
-    /** 저장 시 메일 알림 서비스 호출 검증 */
+    /** 저장 시 공통 메일 알림 서비스 호출 검증 */
     @Test
     void save_sendsNotification() throws Exception {
         Board board = new Board();
@@ -122,7 +124,7 @@ class BoardServiceTest {
 
         boardService.save(board);
 
-        verify(boardMailNotificationService).sendNotification(any(Board.class), eq(true));
+        verify(mailNotificationService).sendNotification(eq("게시물 신규등록"), eq("메일 테스트"), eq("내용"));
     }
 
     /** 메일 알림 실패 시에도 게시글 저장은 정상 진행되는지 검증 */
@@ -131,7 +133,7 @@ class BoardServiceTest {
         Board board = new Board();
         board.setTitle("메일실패");
         when(boardRepository.save(any(Board.class))).thenReturn(board);
-        doThrow(new RuntimeException("SMTP 오류")).when(boardMailNotificationService).sendNotification(any(Board.class), anyBoolean());
+        doThrow(new RuntimeException("SMTP 오류")).when(mailNotificationService).sendNotification(any(), any(), any());
 
         assertDoesNotThrow(() -> boardService.save(board));
         verify(boardRepository).save(board);

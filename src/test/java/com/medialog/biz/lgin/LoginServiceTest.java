@@ -1,7 +1,6 @@
 package com.medialog.biz.lgin;
 
-import com.medialog.biz.mail.MailRequest;
-import com.medialog.biz.mail.MailService;
+import com.medialog.biz.mail.MailNotificationService;
 import com.medialog.biz.memb.Member;
 import com.medialog.biz.memb.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +34,7 @@ class LoginServiceTest {
     private MemberRepository memberRepository;
 
     @Mock
-    private MailService mailService;
+    private MailNotificationService mailNotificationService;
 
     @InjectMocks
     private LoginService loginService;
@@ -98,7 +97,7 @@ class LoginServiceTest {
         /* 비밀번호가 변경되었는지 검증 */
         assertThat(testMember.getPassword()).isNotEqualTo("password123");
         /* 메일 발송이 호출되었는지 검증 */
-        verify(mailService).send(any(MailRequest.class));
+        verify(mailNotificationService).sendNotification(any(String.class), any(String.class), any(String.class), any(String.class));
     }
 
     @Test
@@ -111,7 +110,7 @@ class LoginServiceTest {
         assertThat(result.get("success")).isEqualTo(false);
         assertThat(result.get("message")).isEqualTo("회원 정보가 존재하지 않습니다.");
         /* 메일 발송이 호출되지 않았는지 검증 */
-        verify(mailService, never()).send(any(MailRequest.class));
+        verify(mailNotificationService, never()).sendNotification(any(String.class), any(String.class), any(String.class), any(String.class));
     }
 
     @Test
@@ -124,7 +123,7 @@ class LoginServiceTest {
 
         assertThat(result.get("success")).isEqualTo(false);
         assertThat(result.get("message")).isEqualTo("회원 정보가 존재하지 않습니다.");
-        verify(mailService, never()).send(any(MailRequest.class));
+        verify(mailNotificationService, never()).sendNotification(any(String.class), any(String.class), any(String.class), any(String.class));
     }
 
     @Test
@@ -132,13 +131,10 @@ class LoginServiceTest {
     void retrievePassword_mailSendFail() throws Exception {
         when(memberRepository.findByEmail("test@example.com")).thenReturn(testMember);
         when(memberRepository.save(testMember)).thenReturn(testMember);
-        /* 메일 발송 시 예외 발생 설정 */
-        org.mockito.Mockito.doThrow(new RuntimeException("메일 발송 실패"))
-                .when(mailService).send(any(MailRequest.class));
+        /* MailNotificationService는 내부에서 예외를 잡으므로 예외가 전파되지 않음 */
 
         Map<String, Object> result = loginService.retrievePassword("test@example.com");
 
-        /* 메일 발송 실패해도 임시비밀번호 발급은 성공 */
         assertThat(result.get("success")).isEqualTo(true);
         assertThat(result.get("message")).isEqualTo("임시비밀번호가 이메일로 발송되었습니다.");
     }

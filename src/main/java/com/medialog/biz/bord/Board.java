@@ -14,7 +14,7 @@ import lombok.ToString;
  * @ai-generated
  * @generator Kiro
  * @author sinhuiyo
- * @line Kiro Edit Line : 60, Total Code Line : 60
+ * @line Kiro Edit Line : 60, Total Code Line : 64
  */
 @Entity
 @Getter
@@ -53,6 +53,10 @@ public class Board {
 
     /** 작성자 이름 */
     private String authorName;
+
+    /** 추천수 */
+    @Column(columnDefinition = "int default 0")
+    private int recommendCount = 0;
 
     /** 조회수 */
     @Column(columnDefinition = "int default 0")

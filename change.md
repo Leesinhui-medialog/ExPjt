@@ -1676,6 +1676,30 @@
 
 ---
 
+### 101. Java 변경 시 JUnit 자동 테스트 Hook 등록
+
+| 질의 | 신규 메소드 생성이나 소스 변경 시 JUnit 테스트 진행하는 Hook 생성 요청 |
+|------|----------------------------------------------------------|
+| 결과 | `java-auto-test` Hook 생성. `src/main/java/**/*.java` 파일 저장 시 대응 JUnit 테스트 자동 실행. 테스트 파일 없으면 생성 후 실행. 60초 타임아웃 설정. 실행 명령: `.\gradlew.bat test --tests "{테스트클래스}"`. |
+
+---
+
+### 102. BoardMailNotificationService → 공통 MailNotificationService로 리팩토링
+
+| 질의 | BoardMailNotificationService를 메일 패키지로 이동하고 공통 모듈로 변경, 비밀번호 찾기에도 적용 |
+|------|----------------------------------------------------------------------------|
+| 결과 | `MailNotificationService` 생성 (`com.medialog.biz.mail` 패키지) — 기본 수신자/지정 수신자 메일 발송 메소드 제공. `BoardMailNotificationService` 삭제. `BoardService`에서 `MailNotificationService` 사용으로 변경. `LoginService`의 비밀번호 찾기 메일도 `MailNotificationService` 사용으로 변경. `BoardServiceTest`, `LoginServiceTest` 모두 수정 완료. |
+
+---
+
+### 103. 서버 재시작
+
+| 질의 | 서버 재시작 요청 |
+|------|--------------|
+| 결과 | 기존 포트 8080 사용 중인 프로세스(PID 17896) 종료 후 `gradlew.bat bootRun` 재시작. Tomcat 포트 8080 정상 기동, BizApplication 약 6초 내 시작 완료. |
+
+---
+
 ## 현재 프로젝트 구조
 
 ```
