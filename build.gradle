@@ -42,7 +42,8 @@ tasks.named('test') {
 }
 
 bootRun {
-    jvmArgs = ['-Dfile.encoding=UTF-8', '-Dconsole.encoding=UTF-8']
+    jvmArgs = ['-Dfile.encoding=UTF-8', '-Dconsole.encoding=UTF-8', '-Djavax.net.ssl.trustAll=true', '-Dcom.sun.net.ssl.checkRevocation=false']
+    systemProperty 'mail.smtp.ssl.trust', '*'
 }
 
 tasks.withType(JavaCompile) {

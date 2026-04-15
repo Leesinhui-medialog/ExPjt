@@ -1572,6 +1572,110 @@
 
 ---
 
+### 89. 메일 비밀번호 환경 변수 설정 및 steering 추가
+
+| 질의 | 서버 실행 시 메일 비밀번호를 환경 변수에 넣어서 실행할 수 있도록 steering 변경 |
+|------|------------------------------------------------------------------|
+| 결과 | `공통개발규칙.md`에 환경 변수 섹션 추가. `MAIL_PASSWORD` 환경 변수로 Gmail 앱 비밀번호 주입. `application.yml`에서 `${MAIL_PASSWORD:}`로 참조. 실행 명령: `$env:MAIL_PASSWORD="앱비밀번호"; .\gradlew.bat bootRun`. |
+
+---
+
+### 90. 메일 비밀번호 환경 변수 값 등록
+
+| 질의 | 메일 비밀번호를 환경 변수 실행 예시에 등록 |
+|------|-------------------------------------|
+| 결과 | `공통개발규칙.md` steering의 실행 명령어 예시에 Gmail 앱 비밀번호 반영. 소스코드 하드코딩 없이 환경 변수로 주입: `$env:MAIL_PASSWORD="snegircweywlzror"; .\gradlew.bat bootRun`. |
+
+---
+
+### 91. 게시글 상세 보기 화면 생성
+
+| 질의 | Board 상세 보기 화면 생성, BoardList에서 제목 클릭 시 상세 보기 연결, 수정/취소 버튼 포함 |
+|------|---------------------------------------------------------------------------|
+| 결과 | `BoardDetail.jsx` 생성 — 제목, 첨부파일(다운로드), 내용, 작성자, 작성일, 조회수 표시. 수정/취소 버튼 포함. `BoardList.jsx`에서 제목 클릭 시 `/board/detail/{idx}`로 이동. `App.jsx`에 `/board/detail/:idx` 라우트 및 PAGE_TITLES 추가. |
+
+---
+
+### 92. 서버 시작 (메일 비밀번호 환경 변수 포함)
+
+| 질의 | 서버 시작 요청 |
+|------|--------------|
+| 결과 | `$env:MAIL_PASSWORD="snegircweywlzror"; .\gradlew.bat bootRun`으로 서버 시작. Gradle Daemon 새로 시작 후 Tomcat 포트 8080 정상 기동. 에러 없음. |
+
+---
+
+### 93. 프론트엔드 서버 실행
+
+| 질의 | 프론트엔드 서버 실행 요청 |
+|------|----------------------|
+| 결과 | PowerShell 실행 정책 문제로 `cmd /c "npm run dev"`로 실행. Vite 개발 서버 `http://localhost:3000/` 정상 기동. |
+
+---
+
+### 94. 메일 발송 테스트 (실패 — SSL 인증서 문제)
+
+| 질의 | 메일 발송 테스트 요청 |
+|------|-------------------|
+| 결과 | `/api/mail/send` API 호출 시 400 에러 발생. 서버 로그 확인 결과 `SSLHandshakeException: PKIX path building failed` — Java가 Gmail SMTP 서버의 SSL 인증서를 신뢰하지 못함. 회사 네트워크 SSL 검사(프록시) 가능성. 해결 방안: (1) `build.gradle` bootRun JVM 옵션에 SSL 검증 우회 추가 (개발 환경 한정), (2) 회사 프록시 CA 인증서를 Java truststore에 등록. 사용자 확인 대기 중. |
+
+---
+
+### 95. SSL 인증서 우회 설정 및 메일 발송 성공
+
+| 질의 | SSL 인증서 문제 해결 후 메일 발송 테스트 |
+|------|-------------------------------------|
+| 결과 | `build.gradle` bootRun JVM 옵션에 SSL trust 설정 추가. `application.yml`에 `mail.smtp.ssl.trust: smtp.gmail.com` 추가. 서버 재시작 후 메일 발송 성공 — `sinhuiyo@gmail.com` → `sinhuiyo@medialog.co.kr` 발송 확인. `result: ok`. |
+
+---
+
+### 96. 메일 발송 한글 깨짐 확인
+
+| 질의 | 메일 발송 시 한글이 깨지는 문제 확인 요청 |
+|------|-------------------------------------|
+| 결과 | UTF-8 인코딩 명시하여 메일 발송 재테스트 — 발송 성공(`result: ok`). PowerShell 콘솔 응답 메시지는 콘솔 인코딩 문제로 깨져 보이나, 실제 수신 메일의 한글 깨짐 여부는 사용자 확인 대기 중. MailService에서 `MimeMessageHelper(message, true, "UTF-8")` 설정 확인 완료. |
+
+---
+
+### 97. 게시글 수정일(modDate) 추가
+
+| 질의 | BoardEdit 수정 시 modDate에 수정일 설정, 최초 등록 시 regDate와 동일, BoardDetail에 수정일 표시 |
+|------|---------------------------------------------------------------------------------|
+| 결과 | `BoardService.save()`에서 신규 등록 시 `modDate = regDate`, 수정 시 `modDate = 오늘 날짜`로 설정. `BoardDetail.jsx`에 수정일 표시 필드 추가. Board 엔티티에는 이미 `modDate` 필드 존재. |
+
+---
+
+### 98. BoardService 리팩토링 방안 검토
+
+| 질의 | BoardService를 리팩토링하고 싶어 방법 요청 |
+|------|--------------------------------------|
+| 결과 | 4가지 개선 포인트 분석. (1) `save()`의 메일 발송 로직 분리 → `BoardMailNotificationService` 생성 (단일 책임 원칙), (2) `save()` → `create()`/`update()` 분리 (steering 메소드 네이밍 규칙 부합), (3) 날짜 설정 로직 private 메소드 추출, (4) `softDelete()`의 파일 삭제 private 메소드 추출. 우선순위: 1번(메일 분리) > 2번(create/update 분리). 사용자 범위 선택 대기 중. |
+
+---
+
+### 99. BoardService 메일 발송 로직 분리 (리팩토링)
+
+| 질의 | BoardService에서 메일 발송 로직 분리 |
+|------|--------------------------------|
+| 결과 | `BoardMailNotificationService` 생성 — 게시글 등록/수정 알림 메일 발송 전담. `BoardService`에서 메일 관련 `@Value` 5개 및 `MailService` 의존성 제거, `BoardMailNotificationService.sendNotification()` 호출로 대체. 단일 책임 원칙 적용. `BoardServiceTest` 수정 필요 — 사용자 확인 대기 중. |
+
+---
+
+### 99. BoardService 메일 발송 로직 분리 (리팩토링)
+
+| 질의 | BoardService에서 메일 발송 로직 분리 |
+|------|--------------------------------|
+| 결과 | `BoardMailNotificationService` 생성 — 게시글 등록/수정 시 메일 알림 전담. `BoardService`에서 메일 관련 `@Value` 5개 제거, `MailService` 의존성 제거, `BoardMailNotificationService`로 위임. `BoardServiceTest`도 `MailService` Mock → `BoardMailNotificationService` Mock으로 변경. 단일 책임 원칙 적용 완료. |
+
+---
+
+### 100. git commit/push 명령어 안내
+
+| 질의 | git commit push 명령어 정리 요청 |
+|------|------------------------------|
+| 결과 | steering 규칙에 따라 git 명령어 직접 실행하지 않고 안내. `git status` → `git add .` → `git commit -m "메시지"` → `git push origin main` 순서 안내. 수작업으로 진행. |
+
+---
+
 ## 현재 프로젝트 구조
 
 ```

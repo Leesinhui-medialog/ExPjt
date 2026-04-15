@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-
 import BoardList from './pages/BoardList';
 import BoardWrite from './pages/BoardWrite';
 import BoardEdit from './pages/BoardEdit';
+import BoardDetail from './pages/BoardDetail';
 import MemberRegister from './pages/MemberRegister';
 import MemberList from './pages/MemberList';
 import Login from './pages/Login';
@@ -16,6 +17,7 @@ const PAGE_TITLES = {
   '/board/list': '게시판 - 목록',
   '/board/write': '게시판 - 글쓰기',
   '/board/edit': '게시판 - 수정',
+  '/board/detail': '게시판 - 상세',
   '/mail': '메일',
   '/member/register': '회원 - 가입',
   '/member/list': '회원 - 목록',
@@ -128,6 +130,7 @@ export default function App() {
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/board/list" element={<ProtectedRoute><BoardList /></ProtectedRoute>} />
             <Route path="/board/write" element={<ProtectedRoute><BoardWrite /></ProtectedRoute>} />
+            <Route path="/board/detail/:idx" element={<ProtectedRoute><BoardDetail /></ProtectedRoute>} />
             <Route path="/board/edit/:idx" element={<ProtectedRoute><BoardEdit /></ProtectedRoute>} />
             <Route path="/member/list" element={<ProtectedRoute><MemberList /></ProtectedRoute>} />
             <Route path="/member/edit" element={<ProtectedRoute><MemberEdit /></ProtectedRoute>} />

@@ -1,12 +1,9 @@
 package com.medialog.biz.bord;
 
 import com.medialog.biz.comm.FileUploadService;
-import com.medialog.biz.mail.MailRequest;
-import com.medialog.biz.mail.MailService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -41,18 +38,14 @@ class BoardServiceTest {
     private FileUploadService fileUploadService;
 
     @Mock
-    private MailService mailService;
+    private BoardMailNotificationService boardMailNotificationService;
 
     @InjectMocks
     private BoardService boardService;
 
     @BeforeEach
     void setUp() {
-        ReflectionTestUtils.setField(boardService, "mailSender", "test@test.com");
-        ReflectionTestUtils.setField(boardService, "mailNewTitle", "게시물 신규등록");
-        ReflectionTestUtils.setField(boardService, "mailEditTitle", "게시물 수정");
         ReflectionTestUtils.setField(boardService, "mailWarnFail", "게시물 알림 메일 발송 실패: {}");
-        ReflectionTestUtils.setField(boardService, "mailReceiver", "sinhuiyo@medialog.co.kr");
     }
 
     /** 전체 목록 조회 검증 */
@@ -119,9 +112,9 @@ class BoardServiceTest {
         verify(boardRepository).save(board);
     }
 
-    /** 저장 시 메일 발송 및 수신자 검증 */
+    /** 저장 시 메일 알림 서비스 호출 검증 */
     @Test
-    void save_sendsMailWithCorrectReceiver() throws Exception {
+    void save_sendsNotification() throws Exception {
         Board board = new Board();
         board.setTitle("메일 테스트");
         board.setDescription("내용");
@@ -129,21 +122,16 @@ class BoardServiceTest {
 
         boardService.save(board);
 
-        ArgumentCaptor<MailRequest> captor = ArgumentCaptor.forClass(MailRequest.class);
-        verify(mailService).send(captor.capture());
-        MailRequest sent = captor.getValue();
-        assertEquals("sinhuiyo@medialog.co.kr", sent.getReceiver());
-        assertEquals("게시물 신규등록", sent.getTitle());
-        assertEquals("메일 테스트", sent.getSubject());
+        verify(boardMailNotificationService).sendNotification(any(Board.class), eq(true));
     }
 
-    /** 메일 발송 실패 시에도 게시글 저장은 정상 진행되는지 검증 */
+    /** 메일 알림 실패 시에도 게시글 저장은 정상 진행되는지 검증 */
     @Test
     void save_mailFailure_doesNotThrow() throws Exception {
         Board board = new Board();
         board.setTitle("메일실패");
         when(boardRepository.save(any(Board.class))).thenReturn(board);
-        doThrow(new RuntimeException("SMTP 오류")).when(mailService).send(any(MailRequest.class));
+        doThrow(new RuntimeException("SMTP 오류")).when(boardMailNotificationService).sendNotification(any(Board.class), anyBoolean());
 
         assertDoesNotThrow(() -> boardService.save(board));
         verify(boardRepository).save(board);

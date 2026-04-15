@@ -54,7 +54,7 @@ export default function BoardList() {
               <td style={{ textAlign: 'center' }}>{b.idx}</td>
               <td style={{ textAlign: 'center' }}>{b.filePath && <a href={`/api/upload/download?filePath=${encodeURIComponent(b.filePath)}`} title={b.originalFileName || '다운로드'}><FileIcon filePath={b.filePath} /></a>}</td>
               <td>
-                <Link to={`/board/edit/${b.idx}`}>{truncateText(b.title)}</Link>
+                <Link to={`/board/detail/${b.idx}`}>{truncateText(b.title)}</Link>
               </td>
               <td style={{ textAlign: 'center' }}>{b.authorName || '익명'}</td>
               <td style={{ textAlign: 'center' }}>{b.viewCount || 0}</td>

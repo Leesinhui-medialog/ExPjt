@@ -1,8 +1,6 @@
 package com.medialog.biz.bord;
 
 import com.medialog.biz.comm.FileUploadService;
-import com.medialog.biz.mail.MailRequest;
-import com.medialog.biz.mail.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -28,39 +26,23 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final FileUploadService fileUploadService;
-    private final MailService mailService;
-
-    /** 메일 발신자 주소 */
-    @Value("${spring.mail.username}")
-    private String mailSender;
-
-    /** 신규 등록 메일 제목 */
-    @Value("${app.messages.mail-new-title}")
-    private String mailNewTitle;
-
-    /** 수정 메일 제목 */
-    @Value("${app.messages.mail-edit-title}")
-    private String mailEditTitle;
+    private final BoardMailNotificationService boardMailNotificationService;
 
     /** 메일 발송 실패 경고 메시지 */
     @Value("${app.messages.mail-warn-fail}")
     private String mailWarnFail;
-
-    /** 메일 수신자 주소 */
-    @Value("${app.messages.mail-receiver}")
-    private String mailReceiver;
 
     /**
      * 생성자 주입.
      *
      * @param boardRepository 게시판 리포지토리
      * @param fileUploadService 파일 업로드 서비스
-     * @param mailService 메일 발송 서비스
+     * @param boardMailNotificationService 게시판 메일 알림 서비스
      */
-    public BoardService(BoardRepository boardRepository, FileUploadService fileUploadService, MailService mailService) {
+    public BoardService(BoardRepository boardRepository, FileUploadService fileUploadService, BoardMailNotificationService boardMailNotificationService) {
         this.boardRepository = boardRepository;
         this.fileUploadService = fileUploadService;
-        this.mailService = mailService;
+        this.boardMailNotificationService = boardMailNotificationService;
     }
 
     /**
@@ -112,6 +94,12 @@ public class BoardService {
         if (board.getRegDate() == null || board.getRegDate().isEmpty()) {
             board.setRegDate(java.time.LocalDate.now().toString());
         }
+        /* 최초 등록 시 수정일을 등록일과 동일하게 설정, 수정 시 오늘 날짜로 갱신 */
+        if (isNew) {
+            board.setModDate(board.getRegDate());
+        } else {
+            board.setModDate(java.time.LocalDate.now().toString());
+        }
         /* 삭제 여부 기본값 설정 */
         if (board.getDelYn() == null) {
             board.setDelYn("N");
@@ -119,19 +107,8 @@ public class BoardService {
         boardRepository.save(board);
         log.info("게시글 저장 완료 - idx: {}", board.getIdx());
 
-        /* 메일 발송 (실패해도 게시글 저장은 유지) */
-        try {
-            MailRequest mail = new MailRequest();
-            mail.setTitle(isNew ? mailNewTitle : mailEditTitle);
-            mail.setSubject(board.getTitle());
-            mail.setSender(mailSender);
-            mail.setReceiver(mailReceiver);
-            mail.setContent(board.getDescription());
-            mailService.send(mail);
-            log.info("게시글 알림 메일 발송 완료");
-        } catch (Exception e) {
-            log.warn(mailWarnFail, e.getMessage());
-        }
+        /* 메일 알림 발송 (별도 서비스에 위임) */
+        boardMailNotificationService.sendNotification(board, isNew);
     }
 
     /**
