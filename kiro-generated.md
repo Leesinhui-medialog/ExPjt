@@ -48,3 +48,20 @@
 
 Kiro Total Edit Line : 2,823
 File Total Line : 2,827
+
+
+## 작성자별 Kiro Edit Line 비율
+
+```mermaid
+pie title Kiro Edit Line 작성자별 비율
+    "sinhuiyo (2,519)" : 2519
+    "ssarkia (304)" : 304
+```
+
+## 작성자별 Total Code Line 비율
+
+```mermaid
+pie title Total Code Line 작성자별 비율
+    "sinhuiyo (2,432)" : 2432
+    "ssarkia (395)" : 395
+```

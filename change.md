@@ -1588,6 +1588,14 @@
 
 ---
 
+### 198. kiro-generated-state.md 작성자별 원형 그래프 추가
+
+| 질의 | kiro-generated-state.md에서 Kiro Edit Line, Total Code Line 전체에 대한 사용자별 비율을 원형 그래프로 표시 요청 |
+|------|----------------------------------------------------------------------------------------------|
+| 결과 | `kiro-generated-state.md` 하단에 Mermaid `pie` 차트 2개 추가. (1) Kiro Edit Line 작성자별 비율 — sinhuiyo 2,519(89.2%), ssarkia 304(10.8%). (2) Total Code Line 작성자별 비율 — sinhuiyo 2,432(86.0%), ssarkia 395(14.0%). GitHub, GitLab 등 Mermaid 지원 마크다운 뷰어에서 원형 그래프로 렌더링. |
+
+---
+
 ### 89. 메일 비밀번호 환경 변수 설정 및 steering 추가
 
 | 질의 | 서버 실행 시 메일 비밀번호를 환경 변수에 넣어서 실행할 수 있도록 steering 변경 |
