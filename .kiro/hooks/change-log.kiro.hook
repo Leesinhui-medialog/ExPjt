@@ -1,13 +1,15 @@
 {
   "version": "1.0.0",
   "enabled": true,
-  "name": "change log",
-  "description": "질의한 내용과 결과를 로그에 기록한다.",
+  "name": "Kiro 변경 로그",
+  "description": "질의한 내용과 결과를 Kiro 로그인 계정별 변경 이력 파일에 기록한다.",
   "when": {
     "type": "agentStop"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "질의한 내용과 결과에 대해서 change.md 파일에 로그로 남겨 줘"
-  }
+    "prompt": "질의한 내용과 결과에 대해서 Kiro_Change_{현재 Kiro 로그인 계정 또는 시스템 사용자명}.md 파일에 로그로 남겨 줘. 파일이 없으면 새로 생성하고, 기존 파일이 있으면 마지막 번호 다음 번호로 이어서 추가해 줘. "
+  },
+  "workspaceFolderName": "ExPjt",
+  "shortName": "change-log"
 }
