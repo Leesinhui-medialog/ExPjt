@@ -14,7 +14,7 @@ import lombok.ToString;
  * @ai-generated
  * @generator Kiro
  * @author sinhuiyo
- * @line Kiro Edit Line : 60, Total Code Line : 64
+ * @line Kiro Edit Line : 60, Total Code Line : 68
  */
 @Entity
 @Getter
@@ -47,6 +47,10 @@ public class Board {
     /** 첨부파일 원본 파일명 */
     private String originalFileName;
 
+    /** 수정 여부 (N : 미수정, Y : 수정) */
+    @Column(columnDefinition ="varchar(1) default 'N'")
+    private String modYN ="N";
+
     /** 삭제 여부 (N: 미삭제, Y: 삭제) */
     @Column(columnDefinition = "varchar(1) default 'N'")
     private String delYn = "N";
@@ -57,6 +61,7 @@ public class Board {
     /** 추천수 */
     @Column(columnDefinition = "int default 0")
     private int recommendCount = 0;
+
 
     /** 조회수 */
     @Column(columnDefinition = "int default 0")

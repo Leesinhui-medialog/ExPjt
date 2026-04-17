@@ -24,3 +24,24 @@ export async function deleteBoard(idx) {
   const res = await fetch(`${BASE}/board/${idx}`, { method: 'DELETE' });
   return res.json();
 }
+
+// 골프장 전체 목록 조회
+export async function fetchGolfCourses() {
+  const res = await fetch(`${BASE}/golf-courses`, { credentials: 'include' });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+// 골프장 키워드 검색
+export async function searchGolfCourses(keyword) {
+  const res = await fetch(`${BASE}/golf-courses/search?keyword=${encodeURIComponent(keyword)}`, { credentials: 'include' });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+// 역지오코딩 (위도·경도 → 주소 변환)
+export async function reverseGeocode(lat, lng) {
+  const res = await fetch(`${BASE}/location/reverse-geocode?lat=${lat}&lng=${lng}`, { credentials: 'include' });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}

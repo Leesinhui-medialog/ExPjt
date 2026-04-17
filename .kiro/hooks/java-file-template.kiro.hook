@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Java 신규 파일 기본 형식 생성",
+  "description": "Java 파일이 새로 생성되면 파일 경로에서 패키지명을 추출하고, 프로젝트 Java 코딩 규칙(Javadoc, @Slf4j, 코딩 컨벤션)에 맞는 기본 클래스 템플릿을 자동으로 작성합니다. 대응하는 JUnit 테스트 파일도 함께 생성합니다.",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "**/*.java"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "새로 생성된 Java 파일이 비어있다면, 아래 규칙에 따라 기본 형식을 채워주세요:\n\n1. 파일 경로에서 패키지명을 추출하여 package 선언을 작성합니다.\n2. 파일명(클래스명)과 경로를 분석하여 파일 유형을 판단합니다:\n   - Controller: 클래스명이 Controller로 끝나는 경우 → @RestController, @RequestMapping 포함\n   - Service: 클래스명이 Service로 끝나는 경우 → @Service 포함\n   - Repository: 클래스명이 Repository로 끝나는 경우 → JpaRepository 인터페이스로 생성\n   - Entity(VO): 위에 해당하지 않는 경우 → @Entity, @Getter, @Setter, @NoArgsConstructor, @ToString, @EqualsAndHashCode 포함\n   - Test: src/test/ 경로의 파일인 경우 → @SpringBootTest 또는 @WebMvcTest 기본 구조\n3. Javadoc을 클래스 위에 작성합니다:\n   - @ai-generated\n   - @generator Kiro\n   - @author {현재 Kiro 로그인 계정}\n   - @line Kiro Edit Line : {생성 라인수}, Total Code Line : {전체 라인수}\n4. @Slf4j를 클래스에 추가합니다 (Repository, Entity 제외).\n5. 와일드카드 임포트(import xxx.*)는 사용하지 않습니다.\n6. @AllArgsConstructor, @RequiredArgsConstructor, @Data, @Value 등 금지 어노테이션은 사용하지 않습니다.\n7. src/test/ 경로가 아닌 main 소스인 경우, 대응하는 JUnit 테스트 파일도 함께 생성합니다.\n\n이미 내용이 있는 파일은 수정하지 마세요."
+  }
+}

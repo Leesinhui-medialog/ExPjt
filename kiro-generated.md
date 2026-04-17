@@ -9,6 +9,7 @@
 | src/main/java/com/medialog/biz/BizApplication.java | Spring Boot 애플리케이션 메인 클래스. | sinhuiyo | 25 | 25 | 2026-04-14 |
 | src/main/java/com/medialog/biz/bord/Board.java | 게시판 엔티티 (VO). | sinhuiyo | <span style="color:red">**60**</span> | <span style="color:red">**64**</span> | 2026-04-15 |
 | src/main/java/com/medialog/biz/bord/BoardController.java | 게시판 REST 컨트롤러. | sinhuiyo | 152 | 152 | 2026-04-14 |
+| src/main/java/com/medialog/biz/bord/BoardMailNotificationService.java | 게시판 메일 알림 서비스. | sinhuiyo | 72 | 72 | 2026-04-15 |
 | src/main/java/com/medialog/biz/bord/BoardRepository.java | 게시판 리포지토리. | sinhuiyo | 25 | 25 | 2026-04-14 |
 | src/main/java/com/medialog/biz/bord/BoardService.java | 게시판 서비스. | sinhuiyo | 162 | 162 | 2026-04-15 |
 | src/main/java/com/medialog/biz/comm/FileUploadController.java | 파일 업로드/다운로드 REST 컨트롤러. | sinhuiyo | 104 | 104 | 2026-04-14 |
@@ -30,6 +31,7 @@
 | src/main/java/com/medialog/biz/memb/MemberService.java | 회원 서비스. | sinhuiyo | 80 | 80 | 2026-04-14 |
 | src/test/java/com/medialog/biz/BizApplicationTests.java | 애플리케이션 컨텍스트 로딩 테스트. | sinhuiyo | 21 | 21 | 2026-04-14 |
 | src/test/java/com/medialog/biz/bord/BoardControllerTest.java | 게시판 컨트롤러 테스트. | sinhuiyo | 70 | 70 | 2026-04-14 |
+| src/test/java/com/medialog/biz/bord/BoardMailNotificationServiceTest.java | 게시판 메일 알림 서비스 단위 테스트. | sinhuiyo | 120 | 120 | 2026-04-15 |
 | src/test/java/com/medialog/biz/bord/BoardRepositoryTest.java | 게시판 리포지토리 테스트. | sinhuiyo | 90 | 90 | 2026-04-14 |
 | src/test/java/com/medialog/biz/bord/BoardServiceTest.java | 게시판 서비스 테스트. | sinhuiyo | 181 | 181 | 2026-04-15 |
 | src/test/java/com/medialog/biz/comm/FileUploadServiceTest.java | 파일 업로드 서비스 테스트. | sinhuiyo | 87 | 87 | 2026-04-14 |
@@ -46,20 +48,20 @@
 
 ---
 
-Kiro Total Edit Line : 2,823
-File Total Line : 2,827
-AI 생성 비율 : 99.86 %
+Number of lines changed by Kiro : 3,015
+Total number of lines : 3,019
+AI 생성 비율 : 99.87 %
 
 ## 작성자별 Kiro Edit Line 비율
 
 ```mermaid
 pie title Kiro Edit Line 작성자별 비율
-    "sinhuiyo (2,823)" : 2823
+    "sinhuiyo (3,015)" : 3015
 ```
 
 ## 작성자별 Total Code Line 비율
 
 ```mermaid
 pie title Total Code Line 작성자별 비율
-    "sinhuiyo (2,827)" : 2827
+    "sinhuiyo (3,019)" : 3019
 ```

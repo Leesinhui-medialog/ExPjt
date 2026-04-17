@@ -60,6 +60,14 @@ export default function LeftMenu() {
         { label: '게시글 작성', path: '/board/write' },
       ],
     },
+    {
+      key: 'location',
+      icon: '📍',
+      label: '위치관리',
+      children: [
+        { label: '위치 정보', path: '/location/display' },
+      ],
+    },
   ];
 
   /** 현재 경로가 해당 메뉴에 속하는지 확인 */

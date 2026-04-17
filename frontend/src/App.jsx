@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import MemberEdit from './pages/MemberEdit';
 import PasswordChange from './pages/PasswordChange';
 import LeftMenu from './components/LeftMenu';
+import LocationDisplay from './pages/golf/LocationDisplay';
 
 /** 페이지별 브라우저 탭 제목 매핑 */
 const PAGE_TITLES = {
@@ -23,6 +24,7 @@ const PAGE_TITLES = {
   '/member/list': '회원 - 목록',
   '/member/edit': '회원 - 개인정보 변경',
   '/member/password': '회원 - 비밀번호 변경',
+  '/location/display': '위치 정보',
 };
 
 /** 현재 경로에 맞는 브라우저 탭 제목을 설정하는 컴포넌트 */
@@ -135,6 +137,7 @@ export default function App() {
             <Route path="/member/list" element={<ProtectedRoute><MemberList /></ProtectedRoute>} />
             <Route path="/member/edit" element={<ProtectedRoute><MemberEdit /></ProtectedRoute>} />
             <Route path="/member/password" element={<ProtectedRoute><PasswordChange /></ProtectedRoute>} />
+            <Route path="/location/display" element={<ProtectedRoute><LocationDisplay /></ProtectedRoute>} />
           </Routes>
         </MainLayout>
       ) : (
