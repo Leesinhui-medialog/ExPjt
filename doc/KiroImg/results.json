@@ -1,0 +1,106 @@
+[
+  {
+    "id": "SCT-F-LGIN-001",
+    "major": "로그인",
+    "minor": "로그인 화면 접속",
+    "result": "Pass",
+    "error": "",
+    "img": "LGIN_01_로그인화면.png"
+  },
+  {
+    "id": "SCT-F-LGIN-002",
+    "major": "로그인",
+    "minor": "로그인 처리",
+    "result": "Pass",
+    "error": "",
+    "img": "LGIN_02_로그인성공.png"
+  },
+  {
+    "id": "SCT-F-BORD-001",
+    "major": "게시판",
+    "minor": "게시판 목록 화면",
+    "result": "Pass",
+    "error": "",
+    "img": "BORD_01_게시판목록.png"
+  },
+  {
+    "id": "SCT-F-BORD-002",
+    "major": "게시판",
+    "minor": "게시글 작성 화면",
+    "result": "Pass",
+    "error": "",
+    "img": "BORD_02_글쓰기_저장전.png"
+  },
+  {
+    "id": "SCT-F-BORD-003",
+    "major": "게시판",
+    "minor": "게시글 저장 결과",
+    "result": "Pass",
+    "error": "",
+    "img": "BORD_03_저장결과.png"
+  },
+  {
+    "id": "SCT-F-BORD-004",
+    "major": "게시판",
+    "minor": "게시글 상세 화면",
+    "result": "Pass",
+    "error": "",
+    "img": "BORD_04_상세화면.png"
+  },
+  {
+    "id": "SCT-F-BORD-005",
+    "major": "게시판",
+    "minor": "첨부파일 다운로드",
+    "result": "Pass",
+    "error": "",
+    "img": "BORD_05_첨부파일다운로드.png"
+  },
+  {
+    "id": "SCT-F-GOLF-001",
+    "major": "골프장",
+    "minor": "골프장 화면 표시",
+    "result": "Pass",
+    "error": "",
+    "img": "GOLF_01_골프장화면.png"
+  },
+  {
+    "id": "SCT-F-GOLF-002",
+    "major": "골프장",
+    "minor": "골프장 검색",
+    "result": "Pass",
+    "error": "",
+    "img": "GOLF_02_검색결과.png"
+  },
+  {
+    "id": "SCT-F-MEMB-001",
+    "major": "회원",
+    "minor": "Step 01 약관동의",
+    "result": "Pass",
+    "error": "",
+    "img": "MEMB_01_Step01_약관동의.png"
+  },
+  {
+    "id": "SCT-F-MEMB-002",
+    "major": "회원",
+    "minor": "Step 02 실명확인",
+    "result": "Pass",
+    "error": "",
+    "img": "MEMB_03_Step02_실명확인.png"
+  },
+  {
+    "id": "SCT-F-MEMB-003",
+    "major": "회원",
+    "minor": "Step 03 회원정보입력",
+    "result": "Pass",
+    "error": "",
+    "img": "MEMB_05_Step03_정보입력.png"
+  },
+  {
+    "id": "SCT-F-MEMB-004",
+    "major": "회원",
+    "minor": "가입완료",
+    "result": "Pass",
+    "error": "",
+    "img": "MEMB_07_가입완료.png"
+  }
+]
