@@ -1,16 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
-import BoardList from './pages/BoardList';
-import BoardWrite from './pages/BoardWrite';
-import BoardEdit from './pages/BoardEdit';
-import BoardDetail from './pages/BoardDetail';
-import MemberRegister from './pages/MemberRegister';
-import MemberList from './pages/MemberList';
 import Login from './pages/Login';
-import MemberEdit from './pages/MemberEdit';
-import PasswordChange from './pages/PasswordChange';
+import MemberRegister from './pages/MemberRegister';
 import LeftMenu from './components/LeftMenu';
-import LocationDisplay from './pages/golf/LocationDisplay';
+import boardRoutes from './routes/BoardRoutes';
+import memberRoutes from './routes/MemberRoutes';
+import otherRoutes from './routes/OtherRoutes';
 
 /** 페이지별 브라우저 탭 제목 매핑 */
 const PAGE_TITLES = {
@@ -130,14 +125,12 @@ export default function App() {
         <MainLayout>
           <Routes>
             <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/board/list" element={<ProtectedRoute><BoardList /></ProtectedRoute>} />
-            <Route path="/board/write" element={<ProtectedRoute><BoardWrite /></ProtectedRoute>} />
-            <Route path="/board/detail/:idx" element={<ProtectedRoute><BoardDetail /></ProtectedRoute>} />
-            <Route path="/board/edit/:idx" element={<ProtectedRoute><BoardEdit /></ProtectedRoute>} />
-            <Route path="/member/list" element={<ProtectedRoute><MemberList /></ProtectedRoute>} />
-            <Route path="/member/edit" element={<ProtectedRoute><MemberEdit /></ProtectedRoute>} />
-            <Route path="/member/password" element={<ProtectedRoute><PasswordChange /></ProtectedRoute>} />
-            <Route path="/location/display" element={<ProtectedRoute><LocationDisplay /></ProtectedRoute>} />
+            {/* 게시판 라우트 */}
+            {boardRoutes(ProtectedRoute)}
+            {/* 회원 라우트 */}
+            {memberRoutes(ProtectedRoute)}
+            {/* 기타 라우트 (위치 정보 등) */}
+            {otherRoutes(ProtectedRoute)}
           </Routes>
         </MainLayout>
       ) : (
